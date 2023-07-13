@@ -1,13 +1,25 @@
-﻿class Person
-  attr_accessor :name, :age, :gender
-
-  def initialize(name, age, gender)
-    @name = name
-    @age = age
-    @gender = gender
+﻿class PersonRepository
+  def initialize
+    @people = []
   end
 
-  def introduce
-    puts "Hi, my name is #{@name}. I am #{@age} years old and #{@gender}."
+  def add_person(person)
+    @people << person
+  end
+
+  def remove_person(person)
+    @people.delete(person)
+  end
+
+  def find_by_name(name)
+    @people.find { |person| person.name == name }
+  end
+
+  def find_by_attribute(attribute, value)
+    @people.select { |person| person.send(attribute) == value }
+  end
+
+  def all_people
+    @people
   end
 end
